@@ -27,6 +27,7 @@
     <Content Include="assets\textures.png" />
     <Content Include="index.html" />
     <Content Include="libs\phaser.min .js" />
+    <Content Include="libs\socket.io.js" />
     <Content Include="server\server.js" />
     <Content Include="web.config" />
   </ItemGroup>
@@ -40,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="levels\level1.json" />
+    <Content Include="server\player.js" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -47,7 +49,9 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="classes\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>
