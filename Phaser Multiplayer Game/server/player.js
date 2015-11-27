@@ -5,19 +5,38 @@
 
 	// Getters and setters
 	var getX = function () {
-		return x;
+		return this.x;
 	}
 
 	var getY = function () {
-		return y;
+		return this.y;
 	}
 
-	var setX = function (newX) {
-		x = newX;
+	var getID = function () {
+	    return this.id;
 	}
 
-	var setY = function (newY) {
-		y = newY;
+	var setID = function (id) {
+	    this.id = id;
+	}
+
+	var setX = function (x) {
+		this.x = x;
+	}
+
+	var setY = function (y) {
+		this.y = y;
+	}
+
+    // Define which variables and methods can be accessed
+	return {
+	    getX: getX,
+	    getY: getY,
+	    getID: getID,
+	    setID: setID,
+	    setX: setX,
+	    setY: setY,
+	    id: id
 	}
 
 }

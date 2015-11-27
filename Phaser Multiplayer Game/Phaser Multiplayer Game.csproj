@@ -26,13 +26,14 @@
     <Content Include="assets\player.png" />
     <Content Include="assets\textures.png" />
     <Content Include="index.html" />
-    <Content Include="libs\phaser.min .js" />
+    <Content Include="libs\phaser.min.js" />
     <Content Include="libs\socket.io.js" />
     <Content Include="server\server.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="classes\RemotePlayer.ts" />
     <TypeScriptCompile Include="libs\p2.d.ts" />
     <TypeScriptCompile Include="libs\phaser.comments.d.ts" />
     <TypeScriptCompile Include="libs\phaser.d.ts" />
@@ -49,9 +50,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="classes\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>

@@ -2,14 +2,15 @@
 
 var map: Phaser.Tilemap;
 var player: Phaser.Sprite;
-var players;
+var players = [];
+var MovePlayer: RemotePlayer;
 var background: Phaser.TilemapLayer;
 var layer1: Phaser.TilemapLayer;
 var cursors: Phaser.CursorKeys;
 var timerJump = 0;
 
 var socket;
-var serverIP = "http://localhost";
+var serverIP = "188.120.250.4:5463";
 
 function preload() {
     game.load.tilemap('map', 'levels/level1.json', null, Phaser.Tilemap.TILED_JSON);
@@ -45,6 +46,7 @@ function setEventHandlers() {
     // Socket connection successful
     socket.on('connect', onSocketConnected);
     socket.on('new player', onNewPlayer);
+    socket.on('move player', onMovePlayer);
 }
 
 function onSocketConnected() {
@@ -58,7 +60,26 @@ function onNewPlayer(data) {
     console.log('New player connected:', data.id)
 
     // Add new player to the remote players array
-    players.push(new RemotePlayer(data.id, game, player, data.x, data.y))
+    players.push(new RemotePlayer(data.x, data.y, data.id, player, game));
+}
+
+function onMovePlayer(data) {
+    MovePlayer = playerById(data.id);
+    if (!MovePlayer) {
+        console.log("Player " + data.id +" not found");
+    } else {
+        MovePlayer.setX(data.x);
+        MovePlayer.setY(data.y);
+    }
+}
+
+// Find player by ID
+function playerById(id) {
+    for (var i = 0; i < players.length; i++) {
+        if (players[i].getID() === id) {
+            return players[i];
+        }
+    }
 }
 
 function update() {
