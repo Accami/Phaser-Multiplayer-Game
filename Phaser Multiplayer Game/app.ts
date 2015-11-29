@@ -10,7 +10,7 @@ var cursors: Phaser.CursorKeys;
 var timerJump = 0;
 
 var socket;
-var serverIP = "188.120.250.4:5463";
+var serverIP = "http://188.120.250.4:5463";
 
 function preload() {
     game.load.tilemap('map', 'levels/level1.json', null, Phaser.Tilemap.TILED_JSON);
@@ -68,8 +68,7 @@ function onMovePlayer(data) {
     if (!MovePlayer) {
         console.log("Player " + data.id +" not found");
     } else {
-        MovePlayer.setX(data.x);
-        MovePlayer.setY(data.y);
+        MovePlayer.move(data.x, data.y);
     }
 }
 
@@ -86,6 +85,11 @@ function update() {
     player.body.velocity.x = 0;
     game.physics.arcade.collide(player, layer1);
 
+    for (var i = 0; i < players.length; i++) {
+        players[i].update();
+        game.physics.arcade.collide(players[i], player);
+    }
+
     if (cursors.up.isDown && player.body.onFloor() && game.time.now > timerJump) {
         player.body.velocity.y = -200;
         timerJump = game.time.now + 750;
@@ -98,8 +102,7 @@ function update() {
     if (cursors.left.isDown) {
         player.body.velocity.x = -100;
     }
-
-    socket.emit('move player', { x: player.x, y: player.y })
+    socket.emit('move player', { x: player.x, y: player.y });
 
 }
 

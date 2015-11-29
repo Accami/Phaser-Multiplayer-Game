@@ -21,7 +21,7 @@ function onClientDisconnect() {
 
     // Player not found
     if (!removePlayer) {
-        util.log('Player not found: ' + this.id)
+        console.log('Player not found: ' + this.id)
         return
     }
 
